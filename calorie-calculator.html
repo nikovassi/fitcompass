@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Калориен калкулатор — колко калории са ти нужни | FitCompass</title>
+  <meta name="description" content="Изчисли BMR, TDEE, калорийна цел и макронутриенти според активността, тренировките, крачките и целта си. Безплатен калориен калкулатор на български.">
+  <meta name="theme-color" content="#0b8a5c">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('fc-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Навигационна пътека"><a href="index.html">Начало</a><span>/</span><a href="calculators.html">Калкулатори</a><span>/</span><span>Калориен калкулатор</span></nav>
+        <span class="eyebrow"><i data-icon="flame" style="width:16px;display:inline-flex"></i>Основен инструмент</span>
+        <h1>Калориен калкулатор</h1>
+        <p class="lead">Отговори на няколко въпроса в 4 кратки стъпки. Изчисляваме базовия ти метаболизъм, реалния дневен разход според работата, крачките и тренировките, и препоръчителния прием с макронутриенти за твоята цел.</p>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container">
+        <div class="wizard" id="wizard">
+          <ol class="stepper" id="stepper" aria-label="Стъпки">
+            <li class="current"><button type="button" data-goto="0"><span class="bar"></span><span class="s-num">Стъпка 1</span><span class="s-title">Основни данни</span></button></li>
+            <li><button type="button" data-goto="1"><span class="bar"></span><span class="s-num">Стъпка 2</span><span class="s-title">Ежедневие</span></button></li>
+            <li><button type="button" data-goto="2"><span class="bar"></span><span class="s-num">Стъпка 3</span><span class="s-title">Тренировки</span></button></li>
+            <li><button type="button" data-goto="3"><span class="bar"></span><span class="s-num">Стъпка 4</span><span class="s-title">Цел</span></button></li>
+          </ol>
+
+          <form class="card card-lg" id="calc-form" novalidate>
+            <!-- СТЪПКА 1 -->
+            <div class="step-panel" data-step="0">
+              <div class="step-head">
+                <span class="icon-tile" data-icon="user"></span>
+                <div>
+                  <h2>Основни данни</h2>
+                  <p>Нужни са за изчисляване на базовия метаболизъм (BMR).</p>
+                </div>
+              </div>
+
+              <div class="row" style="margin-bottom:22px">
+                <span class="label">Мерни единици</span>
+                <div class="segmented" role="group" aria-label="Мерни единици">
+                  <button type="button" data-units="metric" aria-pressed="true">kg / cm</button>
+                  <button type="button" data-units="imperial" aria-pressed="false">lb / ft</button>
+                </div>
+              </div>
+
+              <fieldset class="fieldset field" data-field="sex">
+                <legend>Пол <span class="tip"><button type="button" class="tip-btn" aria-label="Защо питаме за пол?">i</button><span class="tip-body" role="tooltip">Уравнението Mifflin-St Jeor използва различна константа за мъже и жени, защото средният дял на мускулна маса е различен.</span></span></legend>
+                <div class="radio-grid cols-2">
+                  <label class="radio-card"><input type="radio" name="sex" value="male"><span class="rc-body"><span class="rc-title">Мъж</span></span></label>
+                  <label class="radio-card"><input type="radio" name="sex" value="female"><span class="rc-body"><span class="rc-title">Жена</span></span></label>
+                </div>
+                <span class="error-msg" data-error="sex"></span>
+              </fieldset>
+
+              <div class="field" data-field="age" style="margin-top:22px">
+                <label class="label" for="age">Възраст</label>
+                <div class="range-field">
+                  <input type="range" id="age-range" min="16" max="90" step="1" value="30" aria-label="Възраст (плъзгач)" data-sync="age">
+                  <div class="input-wrap"><input class="input" id="age" name="age" inputmode="numeric" autocomplete="off" placeholder="30"><span class="unit">г.</span></div>
+                </div>
+                <span class="hint">Между 16 и 100 години. Формулата е валидирана за възрастни.</span>
+                <span class="error-msg" data-error="age"></span>
+              </div>
+
+              <div class="field" data-field="heightCm">
+                <label class="label" for="heightCm">Ръст</label>
+                <div class="range-field metric-only">
+                  <input type="range" id="height-range" min="140" max="210" step="1" value="175" aria-label="Ръст (плъзгач)" data-sync="heightCm">
+                  <div class="input-wrap"><input class="input" id="heightCm" name="heightCm" inputmode="decimal" autocomplete="off" placeholder="175"><span class="unit">cm</span></div>
+                </div>
+                <div class="input-row imperial-only" hidden>
+                  <div class="input-wrap"><input class="input" id="heightFt" name="heightFt" inputmode="numeric" placeholder="5" aria-label="Ръст — футове"><span class="unit">ft</span></div>
+                  <div class="input-wrap"><input class="input" id="heightIn" name="heightIn" inputmode="decimal" placeholder="9" aria-label="Ръст — инчове"><span class="unit">in</span></div>
+                </div>
+                <span class="error-msg" data-error="heightCm"></span>
+              </div>
+
+              <div class="field" data-field="weightKg">
+                <label class="label" for="weightKg">Тегло</label>
+                <div class="range-field metric-only">
+                  <input type="range" id="weight-range" min="40" max="160" step="0.5" value="75" aria-label="Тегло (плъзгач)" data-sync="weightKg">
+                  <div class="input-wrap"><input class="input" id="weightKg" name="weightKg" inputmode="decimal" autocomplete="off" placeholder="75"><span class="unit">kg</span></div>
+                </div>
+                <div class="imperial-only" hidden>
+                  <div class="input-wrap"><input class="input" id="weightLb" name="weightLb" inputmode="decimal" placeholder="165" aria-label="Тегло в паундове"><span class="unit">lb</span></div>
+                </div>
+                <span class="hint">Сутрешно тегло на гладно е най-точно.</span>
+                <span class="error-msg" data-error="weightKg"></span>
+              </div>
+            </div>
+
+            <!-- СТЪПКА 2 -->
+            <div class="step-panel" data-step="1" hidden>
+              <div class="step-head">
+                <span class="icon-tile" data-icon="briefcase"></span>
+                <div>
+                  <h2>Ежедневна активност</h2>
+                  <p>Движението извън тренировките често е по-голяма част от разхода, отколкото самите тренировки.</p>
+                </div>
+              </div>
+
+              <fieldset class="fieldset field" data-field="workActivity">
+                <legend>Какво е натоварването в работата ти? <span class="tip"><button type="button" class="tip-btn" aria-label="Повече информация">i</button><span class="tip-body" role="tooltip">Тук оценяваме активността без ходенето — стоене, носене, физически задачи. Ходенето се отчита отделно чрез крачките, за да не се брои два пъти.</span></span></legend>
+                <div class="radio-grid">
+                  <label class="radio-card"><input type="radio" name="workActivity" value="sedentary"><span class="rc-body"><span class="rc-title">Седяща</span><span class="rc-desc">Офис, шофиране, работа от вкъщи</span></span></label>
+                  <label class="radio-card"><input type="radio" name="workActivity" value="standing"><span class="rc-body"><span class="rc-title">Предимно права</span><span class="rc-desc">Продавач, учител, фризьор</span></span></label>
+                  <label class="radio-card"><input type="radio" name="workActivity" value="physical"><span class="rc-body"><span class="rc-title">Физическа</span><span class="rc-desc">Склад, сервитьор, медицинска сестра</span></span></label>
+                  <label class="radio-card"><input type="radio" name="workActivity" value="heavy"><span class="rc-body"><span class="rc-title">Тежка физическа</span><span class="rc-desc">Строителство, земеделие, товарене</span></span></label>
+                </div>
+                <span class="error-msg" data-error="workActivity"></span>
+              </fieldset>
+
+              <div class="field" data-field="steps" style="margin-top:26px">
+                <label class="label" for="steps">Средно крачки на ден <span class="opt">(по избор)</span> <span class="tip"><button type="button" class="tip-btn" aria-label="Как да разбера?">i</button><span class="tip-body" role="tooltip">Вижте средната стойност за последните 7–30 дни в телефона или часовника си. Ориентир: заседнал ден ≈ 3000, активен ≈ 8000–10 000.</span></span></label>
+                <div class="range-field">
+                  <input type="range" id="steps-range" min="0" max="25000" step="500" value="6000" aria-label="Крачки (плъзгач)" data-sync="steps">
+                  <div class="input-wrap"><input class="input" id="steps" name="steps" inputmode="numeric" autocomplete="off" placeholder="6000"></div>
+                </div>
+                <div class="chip-scroll" style="margin-top:6px" aria-label="Бърз избор">
+                  <button type="button" class="chip" data-steps="3000">~3000 · заседнал</button>
+                  <button type="button" class="chip" data-steps="5000">~5000 · лек</button>
+                  <button type="button" class="chip" data-steps="8000">~8000 · активен</button>
+                  <button type="button" class="chip" data-steps="12000">~12 000 · много активен</button>
+                </div>
+                <span class="error-msg" data-error="steps"></span>
+              </div>
+              <div class="live-estimate" id="live-steps" aria-live="polite"></div>
+            </div>
+
+            <!-- СТЪПКА 3 -->
+            <div class="step-panel" data-step="2" hidden>
+              <div class="step-head">
+                <span class="icon-tile" data-icon="dumbbell"></span>
+                <div>
+                  <h2>Тренировки</h2>
+                  <p>Попълни средното за една обичайна седмица. Ако не тренираш — остави нули.</p>
+                </div>
+              </div>
+
+              <div class="subcard">
+                <div class="subcard-head"><span class="icon-tile" style="width:36px;height:36px;margin:0" data-icon="dumbbell"></span><h3>Силови тренировки</h3></div>
+                <div class="grid grid-2" style="gap:14px">
+                  <div class="field" data-field="strengthSessions">
+                    <label class="label" for="strengthSessions">Пъти седмично</label>
+                    <div class="input-wrap"><input class="input" id="strengthSessions" name="strengthSessions" inputmode="numeric" placeholder="0"><span class="unit">×/седм.</span></div>
+                    <span class="error-msg" data-error="strengthSessions"></span>
+                  </div>
+                  <div class="field" data-field="strengthMinutes" style="margin-top:0">
+                    <label class="label" for="strengthMinutes">Продължителност</label>
+                    <div class="input-wrap"><input class="input" id="strengthMinutes" name="strengthMinutes" inputmode="numeric" placeholder="60"><span class="unit">мин</span></div>
+                    <span class="error-msg" data-error="strengthMinutes"></span>
+                  </div>
+                </div>
+                <div class="field" style="margin-top:14px">
+                  <span class="label">Интензивност <span class="tip"><button type="button" class="tip-btn" aria-label="Интензивност">i</button><span class="tip-body" role="tooltip">Лека: дълги почивки, машини. Умерена: класическа тренировка с щанги и дъмбели. Висока: кратки почивки, супер серии, кръгови тренировки.</span></span></span>
+                  <div class="segmented" role="group" aria-label="Интензивност на силовите" data-seg="strengthIntensity">
+                    <button type="button" data-value="light" aria-pressed="false">Лека</button>
+                    <button type="button" data-value="moderate" aria-pressed="true">Умерена</button>
+                    <button type="button" data-value="vigorous" aria-pressed="false">Висока</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="subcard">
+                <div class="subcard-head"><span class="icon-tile accent" style="width:36px;height:36px;margin:0" data-icon="heart"></span><h3>Кардио (колоездене, плуване, фитнес уреди, спорт)</h3></div>
+                <div class="grid grid-2" style="gap:14px">
+                  <div class="field" data-field="cardioSessions">
+                    <label class="label" for="cardioSessions">Пъти седмично</label>
+                    <div class="input-wrap"><input class="input" id="cardioSessions" name="cardioSessions" inputmode="numeric" placeholder="0"><span class="unit">×/седм.</span></div>
+                    <span class="error-msg" data-error="cardioSessions"></span>
+                  </div>
+                  <div class="field" data-field="cardioMinutes" style="margin-top:0">
+                    <label class="label" for="cardioMinutes">Продължителност</label>
+                    <div class="input-wrap"><input class="input" id="cardioMinutes" name="cardioMinutes" inputmode="numeric" placeholder="30"><span class="unit">мин</span></div>
+                    <span class="error-msg" data-error="cardioMinutes"></span>
+                  </div>
+                </div>
+                <div class="field" style="margin-top:14px">
+                  <span class="label">Интензивност <span class="tip"><button type="button" class="tip-btn" aria-label="Интензивност на кардиото">i</button><span class="tip-body" role="tooltip">Лека: можеш да пееш. Умерена: можеш да говориш на изречения. Висока: трудно казваш повече от няколко думи.</span></span></span>
+                  <div class="segmented" role="group" aria-label="Интензивност на кардиото" data-seg="cardioIntensity">
+                    <button type="button" data-value="light" aria-pressed="false">Лека</button>
+                    <button type="button" data-value="moderate" aria-pressed="true">Умерена</button>
+                    <button type="button" data-value="vigorous" aria-pressed="false">Висока</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="subcard">
+                <div class="subcard-head"><span class="icon-tile" style="width:36px;height:36px;margin:0" data-icon="run"></span><h3>Бягане</h3></div>
+                <div class="field" data-field="runningKmPerWeek">
+                  <label class="label" for="runningKmPerWeek">Километри седмично <span class="opt">(по избор)</span> <span class="tip"><button type="button" class="tip-btn" aria-label="Бягане">i</button><span class="tip-body" role="tooltip">Разходът при бягане зависи основно от разстоянието и теглото, а не толкова от скоростта: ≈ 0,9 kcal на kg на km над нивото на покой.</span></span></label>
+                  <div class="input-wrap"><input class="input" id="runningKmPerWeek" name="runningKmPerWeek" inputmode="decimal" placeholder="0"><span class="unit">km</span></div>
+                  <span class="error-msg" data-error="runningKmPerWeek"></span>
+                </div>
+              </div>
+              <div class="live-estimate" id="live-training" aria-live="polite"></div>
+            </div>
+
+            <!-- СТЪПКА 4 -->
+            <div class="step-panel" data-step="3" hidden>
+              <div class="step-head">
+                <span class="icon-tile" data-icon="target"></span>
+                <div>
+                  <h2>Каква е основната ти цел?</h2>
+                  <p>Целта определя калорийния дефицит или излишък и разпределението на макросите.</p>
+                </div>
+              </div>
+              <fieldset class="fieldset field" data-field="goal">
+                <legend class="sr-only">Цел</legend>
+                <div class="radio-grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+                  <label class="radio-card"><input type="radio" name="goal" value="lose"><span class="rc-body"><span class="rc-icon" data-icon="trendingDown"></span><span class="rc-title">Отслабване</span><span class="rc-desc">Умерен дефицит ~20% за устойчиво намаляване на мазнините</span></span></label>
+                  <label class="radio-card"><input type="radio" name="goal" value="maintain"><span class="rc-body"><span class="rc-icon" data-icon="minus"></span><span class="rc-title">Поддържане</span><span class="rc-desc">Стабилно тегло и по-добра композиция</span></span></label>
+                  <label class="radio-card"><input type="radio" name="goal" value="gain"><span class="rc-body"><span class="rc-icon" data-icon="trendingUp"></span><span class="rc-title">Качване на тегло</span><span class="rc-desc">По-голям излишък при трудно качване</span></span></label>
+                  <label class="radio-card"><input type="radio" name="goal" value="muscle"><span class="rc-body"><span class="rc-icon" data-icon="dumbbell"></span><span class="rc-title">Мускулна маса</span><span class="rc-desc">Малък излишък — повече мускули, по-малко мазнини</span></span></label>
+                  <label class="radio-card"><input type="radio" name="goal" value="performance"><span class="rc-body"><span class="rc-icon" data-icon="zap"></span><span class="rc-title">Спортни постижения</span><span class="rc-desc">Достатъчно енергия и въглехидрати за тренировките</span></span></label>
+                </div>
+                <span class="error-msg" data-error="goal"></span>
+              </fieldset>
+            </div>
+
+            <div class="form-errors" id="form-errors" aria-live="assertive"></div>
+
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-ghost" id="btn-reset"><i data-icon="refresh" style="display:inline-flex"></i>Нулирай</button>
+              <span class="spacer"></span>
+              <button type="button" class="btn" id="btn-back"><i data-icon="arrowLeft" style="display:inline-flex"></i>Назад</button>
+              <button type="button" class="btn btn-primary" id="btn-next">Напред<i data-icon="arrowRight" style="display:inline-flex"></i></button>
+              <button type="submit" class="btn btn-primary btn-lg" id="btn-calc" hidden><i data-icon="calculator" style="display:inline-flex"></i>Изчисли</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- РЕЗУЛТАТИ -->
+        <div id="results" class="results" hidden tabindex="-1" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/pages/calorie-calculator.js"></script>
+</body>
+</html>

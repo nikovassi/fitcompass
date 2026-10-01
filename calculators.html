@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Фитнес калкулатори — BMI, BMR, TDEE, макроси, протеин, 1RM | FitCompass</title>
+  <meta name="description" content="Безплатни фитнес калкулатори на български: BMI, BMR, TDEE, макронутриенти, протеин и едноповторен максимум (1RM).">
+  <meta name="theme-color" content="#0b8a5c">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('fc-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Навигационна пътека"><a href="index.html">Начало</a><span>/</span><span>Калкулатори</span></nav>
+        <span class="eyebrow"><i data-icon="calculator"></i>Инструменти</span>
+        <h1>Фитнес калкулатори</h1>
+        <p class="lead">Бързи калкулатори за конкретен въпрос. За пълен персонален план с активност, крачки и тренировки използвай калорийния калкулатор.</p>
+        <a class="card card-link" href="calorie-calculator.html" style="margin-top:22px;display:flex;gap:16px;align-items:center;max-width:640px;padding:18px 20px">
+          <span class="icon-tile accent" style="margin:0" data-icon="flame"></span>
+          <span style="flex:1"><b>Калориен калкулатор</b><br><span class="small muted">BMR, TDEE, калорийна цел и макроси в 4 стъпки — основният ни инструмент</span></span>
+          <i data-icon="arrowRight"></i>
+        </a>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container">
+        <div class="tabs" role="tablist" aria-label="Калкулатори" id="calc-tabs">
+          <button role="tab" id="tab-bmi" aria-controls="bmi" aria-selected="true" data-tab="bmi">BMI</button>
+          <button role="tab" id="tab-bmr" aria-controls="bmr" aria-selected="false" data-tab="bmr">BMR</button>
+          <button role="tab" id="tab-tdee" aria-controls="tdee" aria-selected="false" data-tab="tdee">TDEE</button>
+          <button role="tab" id="tab-macro" aria-controls="macro" aria-selected="false" data-tab="macro">Макроси</button>
+          <button role="tab" id="tab-protein" aria-controls="protein" aria-selected="false" data-tab="protein">Протеин</button>
+          <button role="tab" id="tab-one-rm" aria-controls="one-rm" aria-selected="false" data-tab="one-rm">1RM</button>
+        </div>
+
+        <!-- BMI -->
+        <div class="tab-panel" role="tabpanel" id="bmi" aria-labelledby="tab-bmi">
+          <div class="grid grid-2">
+            <form class="card card-lg" data-calc="bmi" novalidate>
+              <h2>BMI калкулатор</h2>
+              <p class="muted">Индекс на телесна маса = тегло (kg) / ръст² (m).</p>
+              <div class="input-row">
+                <div class="field" data-field="h"><label class="label" for="bmi-h">Ръст</label><div class="input-wrap"><input class="input" id="bmi-h" name="h" inputmode="decimal" placeholder="175"><span class="unit">cm</span></div><span class="error-msg"></span></div>
+                <div class="field" data-field="w" style="margin-top:0"><label class="label" for="bmi-w">Тегло</label><div class="input-wrap"><input class="input" id="bmi-w" name="w" inputmode="decimal" placeholder="75"><span class="unit">kg</span></div><span class="error-msg"></span></div>
+              </div>
+              <div class="row" style="margin-top:20px"><button class="btn btn-primary" type="submit">Изчисли</button><button class="btn btn-ghost" type="reset">Нулирай</button></div>
+            </form>
+            <div class="card card-lg" data-out="bmi" aria-live="polite"><p class="muted">Въведи ръст и тегло, за да видиш резултата.</p></div>
+          </div>
+        </div>
+
+        <!-- BMR -->
+        <div class="tab-panel" role="tabpanel" id="bmr" aria-labelledby="tab-bmr" hidden>
+          <div class="grid grid-2">
+            <form class="card card-lg" data-calc="bmr" novalidate>
+              <h2>BMR калкулатор</h2>
+              <p class="muted">Базов метаболизъм — калориите за поддържане на жизнените функции в покой.</p>
+              <div class="field" data-field="sex"><span class="label">Пол</span><div class="segmented" data-radio="sex"><button type="button" data-value="male" aria-pressed="true">Мъж</button><button type="button" data-value="female" aria-pressed="false">Жена</button></div></div>
+              <div class="input-row" style="margin-top:16px">
+                <div class="field" data-field="age"><label class="label" for="bmr-a">Възраст</label><div class="input-wrap"><input class="input" id="bmr-a" name="age" inputmode="numeric" placeholder="30"><span class="unit">г.</span></div><span class="error-msg"></span></div>
+                <div class="field" data-field="h" style="margin-top:0"><label class="label" for="bmr-h">Ръст</label><div class="input-wrap"><input class="input" id="bmr-h" name="h" inputmode="decimal" placeholder="175"><span class="unit">cm</span></div><span class="error-msg"></span></div>
+              </div>
+              <div class="input-row" style="margin-top:16px">
+                <div class="field" data-field="w"><label class="label" for="bmr-w">Тегло</label><div class="input-wrap"><input class="input" id="bmr-w" name="w" inputmode="decimal" placeholder="75"><span class="unit">kg</span></div><span class="error-msg"></span></div>
+                <div class="field" data-field="bf" style="margin-top:0"><label class="label" for="bmr-bf">% мазнини <span class="opt">(по избор)</span></label><div class="input-wrap"><input class="input" id="bmr-bf" name="bf" inputmode="decimal" placeholder="—"><span class="unit">%</span></div><span class="error-msg"></span></div>
+              </div>
+              <div class="row" style="margin-top:20px"><button class="btn btn-primary" type="submit">Изчисли</button><button class="btn btn-ghost" type="reset">Нулирай</button></div>
+            </form>
+            <div class="card card-lg" data-out="bmr" aria-live="polite"><p class="muted">Попълни данните, за да сравниш трите уравнения.</p></div>
+          </div>
+        </div>
+
+        <!-- TDEE -->
+        <div class="tab-panel" role="tabpanel" id="tdee" aria-labelledby="tab-tdee" hidden>
+          <div class="grid grid-2">
+            <form class="card card-lg" data-calc="tdee" novalidate>
+              <h2>TDEE калкулатор</h2>
+              <p class="muted">Бърза оценка с класически множител на активност. За по-точен резултат ползвай <a href="calorie-calculator.html">калорийния калкулатор</a>.</p>
+              <div class="field" data-field="sex"><span class="label">Пол</span><div class="segmented" data-radio="sex"><button type="button" data-value="male" aria-pressed="true">Мъж</button><button type="button" data-value="female" aria-pressed="false">Жена</button></div></div>
+              <div class="input-row" style="margin-top:16px">
+                <div class="field" data-field="age"><label class="label" for="tdee-a">Възраст</label><div class="input-wrap"><input class="input" id="tdee-a" name="age" inputmode="numeric" placeholder="30"><span class="unit">г.</span></div><span class="error-msg"></span></div>
+                <div class="field" data-field="h" style="margin-top:0"><label class="label" for="tdee-h">Ръст</label><div class="input-wrap"><input class="input" id="tdee-h" name="h" inputmode="decimal" placeholder="175"><span class="unit">cm</span></div><span class="error-msg"></span></div>
+              </div>
+              <div class="field" data-field="w"><label class="label" for="tdee-w">Тегло</label><div class="input-wrap"><input class="input" id="tdee-w" name="w" inputmode="decimal" placeholder="75"><span class="unit">kg</span></div><span class="error-msg"></span></div>
+              <div class="field" data-field="act"><label class="label" for="tdee-act">Активност</label><select class="select" id="tdee-act" name="act"></select></div>
+              <div class="row" style="margin-top:20px"><button class="btn btn-primary" type="submit">Изчисли</button><button class="btn btn-ghost" type="reset">Нулирай</button></div>
+            </form>
+            <div class="card card-lg" data-out="tdee" aria-live="polite"><p class="muted">Попълни данните за оценка на дневния разход.</p></div>
+          </div>
+        </div>
+
+        <!-- MACRO -->
+        <div class="tab-panel" role="tabpanel" id="macro" aria-labelledby="tab-macro" hidden>
+          <div class="grid grid-2">
+            <form class="card card-lg" data-calc="macro" novalidate>
+              <h2>Макро калкулатор</h2>
+              <p class="muted">Раздели дневните калории на белтъчини, въглехидрати и мазнини.</p>
+              <div class="field" data-field="kcal"><label class="label" for="macro-k">Дневни калории</label><div class="input-wrap"><input class="input" id="macro-k" name="kcal" inputmode="numeric" placeholder="2200"><span class="unit">kcal</span></div><span class="error-msg"></span></div>
+              <div class="field"><span class="label">Готово разпределение</span>
+                <div class="chip-scroll" id="macro-presets">
+                  <button type="button" class="chip" data-p="30,40,30">Балансирано 30/40/30</button>
+                  <button type="button" class="chip" data-p="35,35,30">Повече белтък 35/35/30</button>
+                  <button type="button" class="chip" data-p="25,50,25">Издръжливост 25/50/25</button>
+                  <button type="button" class="chip" data-p="30,20,50">Ниско въглехидратно 30/20/50</button>
+                </div>
+              </div>
+              <div class="field" data-field="split">
+                <span class="label">Белтъчини <b id="mp-p" style="margin-left:auto;color:var(--protein)">30%</b></span>
+                <input type="range" min="10" max="50" step="1" value="30" name="p" aria-label="Белтъчини %">
+                <span class="label">Въглехидрати <b id="mp-c" style="margin-left:auto;color:var(--carbs)">40%</b></span>
+                <input type="range" min="5" max="70" step="1" value="40" name="c" aria-label="Въглехидрати %">
+                <span class="label">Мазнини <b id="mp-f" style="margin-left:auto;color:var(--fat)">30%</b></span>
+                <span class="hint">Мазнините получават остатъка до 100% (мин. 15%).</span>
+                <span class="error-msg"></span>
+              </div>
+              <div class="row" style="margin-top:20px"><button class="btn btn-primary" type="submit">Изчисли</button><button class="btn btn-ghost" type="reset">Нулирай</button></div>
+            </form>
+            <div class="card card-lg" data-out="macro" aria-live="polite"><p class="muted">Въведи калориите и избери разпределение.</p></div>
+          </div>
+        </div>
+
+        <!-- PROTEIN -->
+        <div class="tab-panel" role="tabpanel" id="protein" aria-labelledby="tab-protein" hidden>
+          <div class="grid grid-2">
+            <form class="card card-lg" data-calc="protein" novalidate>
+              <h2>Протеин калкулатор</h2>
+              <p class="muted">Препоръчителен дневен прием на белтък според активността.</p>
+              <div class="input-row">
+                <div class="field" data-field="w"><label class="label" for="pr-w">Тегло</label><div class="input-wrap"><input class="input" id="pr-w" name="w" inputmode="decimal" placeholder="75"><span class="unit">kg</span></div><span class="error-msg"></span></div>
+                <div class="field" data-field="h" style="margin-top:0"><label class="label" for="pr-h">Ръст <span class="opt">(по избор)</span></label><div class="input-wrap"><input class="input" id="pr-h" name="h" inputmode="decimal" placeholder="175"><span class="unit">cm</span></div><span class="error-msg"></span></div>
+              </div>
+              <div class="field"><label class="label" for="pr-l">Ниво на активност</label><select class="select" id="pr-l" name="level"></select></div>
+              <div class="row" style="margin-top:20px"><button class="btn btn-primary" type="submit">Изчисли</button><button class="btn btn-ghost" type="reset">Нулирай</button></div>
+            </form>
+            <div class="card card-lg" data-out="protein" aria-live="polite"><p class="muted">Въведи теглото си.</p></div>
+          </div>
+        </div>
+
+        <!-- 1RM -->
+        <div class="tab-panel" role="tabpanel" id="one-rm" aria-labelledby="tab-one-rm" hidden>
+          <div class="grid grid-2">
+            <form class="card card-lg" data-calc="onerm" novalidate>
+              <h2>1RM калкулатор</h2>
+              <p class="muted">Оцени максималната тежест за едно повторение, без да я опитваш.</p>
+              <div class="input-row">
+                <div class="field" data-field="w"><label class="label" for="rm-w">Вдигната тежест</label><div class="input-wrap"><input class="input" id="rm-w" name="w" inputmode="decimal" placeholder="80"><span class="unit">kg</span></div><span class="error-msg"></span></div>
+                <div class="field" data-field="r" style="margin-top:0"><label class="label" for="rm-r">Повторения</label><div class="input-wrap"><input class="input" id="rm-r" name="r" inputmode="numeric" placeholder="5"><span class="unit">пвт.</span></div><span class="error-msg"></span></div>
+              </div>
+              <p class="hint" style="margin-top:10px">Най-точно е при 2–10 повторения до отказ или близо до отказ.</p>
+              <div class="row" style="margin-top:20px"><button class="btn btn-primary" type="submit">Изчисли</button><button class="btn btn-ghost" type="reset">Нулирай</button></div>
+            </form>
+            <div class="card card-lg" data-out="onerm" aria-live="polite"><p class="muted">Въведи тежест и брой повторения.</p></div>
+          </div>
+        </div>
+
+        <div class="notice" style="margin-top:28px"><i data-icon="info"></i><p>Всички резултати са оценки на база публикувани уравнения и не са медицински съвет.</p></div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/pages/calculators.js"></script>
+</body>
+</html>

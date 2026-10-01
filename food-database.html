@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>База данни с храни — калории, макроси, ГИ и инсулинов индекс | FitCompass</title>
+  <meta name="description" content="Търси хранителни стойности на над 100 често срещани храни: калории, белтъчини, въглехидрати, мазнини, фибри, гликемичен и инсулинов индекс. Данни от USDA и рецензирани изследвания.">
+  <meta name="theme-color" content="#0b8a5c">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('fc-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Навигационна пътека"><a href="index.html">Начало</a><span>/</span><span>База данни храни</span></nav>
+        <span class="eyebrow"><i data-icon="database"></i>Инструмент</span>
+        <h1>База данни с храни</h1>
+        <p class="lead">Бързо разбери хранителния профил на често срещани храни. Стойностите са на 100 г или на типична порция, с гликемичен и инсулинов индекс там, където има надеждни измервания.</p>
+        <div class="hero-stats" id="db-stats"></div>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container">
+        <div class="table-tools">
+          <div class="search-box">
+            <i data-icon="search"></i>
+            <label for="q" class="sr-only">Търси храна</label>
+            <input class="input" id="q" type="search" placeholder="Търси храна… напр. ориз, пилешко, chicken" autocomplete="off" enterkeyhint="search">
+            <button type="button" class="btn btn-ghost btn-sm clear" id="q-clear" hidden aria-label="Изчисти търсенето">✕</button>
+          </div>
+          <div>
+            <div class="small muted" style="font-weight:800;margin-bottom:6px">Категория</div>
+            <div class="chip-scroll" id="cats" role="group" aria-label="Категории"></div>
+          </div>
+          <div>
+            <div class="small muted" style="font-weight:800;margin-bottom:6px">Филтри <span class="tip"><button type="button" class="tip-btn" aria-label="Как работят филтрите?">i</button><span class="tip-body" role="tooltip" id="filter-rules"></span></span></div>
+            <div class="chip-scroll" id="filters" role="group" aria-label="Филтри"></div>
+          </div>
+          <div class="tools-row">
+            <label class="sr-only" for="sort">Подреди по</label>
+            <select class="select" id="sort" style="width:auto;min-height:42px">
+              <option value="name">Подреди: име</option>
+              <option value="kcal">Калории</option>
+              <option value="protein">Белтъчини</option>
+              <option value="carbs">Въглехидрати</option>
+              <option value="fat">Мазнини</option>
+              <option value="fiber">Фибри</option>
+              <option value="gi">Гликемичен индекс</option>
+              <option value="ii">Инсулинов индекс</option>
+            </select>
+            <button type="button" class="btn btn-sm" id="sort-dir" aria-label="Посока на подреждане">↑ възходящо</button>
+            <div class="segmented" role="group" aria-label="Стойности" id="basis">
+              <button type="button" data-basis="100" aria-pressed="true">на 100 г</button>
+              <button type="button" data-basis="serving" aria-pressed="false">на порция</button>
+            </div>
+            <span class="spacer"></span>
+            <span class="result-count" id="count" aria-live="polite"></span>
+            <button type="button" class="btn btn-ghost btn-sm" id="reset" hidden>Изчисти филтрите</button>
+          </div>
+        </div>
+
+        <div class="table-wrap desktop-table">
+          <div class="table-scroll">
+            <table class="data" id="table">
+              <thead><tr>
+                <th scope="col" data-sort="name"><button type="button">Храна</button></th>
+                <th scope="col" data-sort="kcal"><button type="button">kcal</button></th>
+                <th scope="col" data-sort="protein"><button type="button">Белтък г</button></th>
+                <th scope="col" data-sort="carbs"><button type="button">Въгл. г</button></th>
+                <th scope="col" data-sort="fat"><button type="button">Мазн. г</button></th>
+                <th scope="col" data-sort="fiber"><button type="button">Фибри г</button></th>
+                <th scope="col" data-sort="gi"><button type="button">ГИ</button></th>
+                <th scope="col" data-sort="ii"><button type="button">Инсулинов инд.</button></th>
+                <th scope="col" class="left">Порция</th>
+              </tr></thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="food-cards" id="cards"></div>
+
+        <div class="grid grid-3" style="margin-top:28px">
+          <div class="notice">
+            <i data-icon="info"></i>
+            <p><b>Източници.</b> Хранителни стойности: USDA FoodData Central (SR Legacy). ГИ: International Tables of GI 2008 (глюкоза = 100). Инсулинов индекс: Holt et al. 1997 и Bao et al. 2009 (бял хляб = 100). Всеки запис има линк към източника.</p>
+          </div>
+          <div class="notice">
+            <i data-icon="alert"></i>
+            <p><b>„Няма данни“ означава точно това.</b> Не изчисляваме и не оценяваме ГИ или инсулинов индекс, когато храната не е тествана. „Неприложимо“ — храната почти няма въглехидрати и ГИ не може да се измери.</p>
+          </div>
+          <div class="notice">
+            <i data-icon="book"></i>
+            <p>Какво всъщност показва инсулиновият индекс и защо не е класация „добра/лоша храна“? <a href="insulin-index.html">Прочети обяснението →</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="modal" id="food-modal" aria-labelledby="fm-title"></dialog>
+
+  <div id="site-footer"></div>
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/pages/food-database.js"></script>
+</body>
+</html>

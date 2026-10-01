@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Упражнения — библиотека с техника | FitCompass</title>
+  <meta name="description" content="Библиотека с основни упражнения за сила и мускулна маса: техника стъпка по стъпка, мускулни групи, оборудване и ниво.">
+  <meta name="theme-color" content="#0b8a5c">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('fc-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Навигационна пътека"><a href="index.html">Начало</a><span>/</span><a href="workouts.html">Тренировки</a><span>/</span><span>Упражнения</span></nav>
+        <span class="eyebrow"><i data-icon="dumbbell"></i>Тренирай</span>
+        <h1>Упражнения</h1>
+        <p class="lead">Основните движения, от които се нуждаеш. Кликни „Техника“ за кратки инструкции стъпка по стъпка.</p>
+      </div>
+    </section>
+    <section class="section-tight">
+      <div class="container">
+        <div class="table-tools">
+          <div class="search-box">
+            <i data-icon="search"></i>
+            <label class="sr-only" for="eq">Търси упражнение</label>
+            <input class="input" id="eq" type="search" placeholder="Търси упражнение… напр. клек, гръб" autocomplete="off">
+          </div>
+          <div class="chip-scroll" id="muscles" role="group" aria-label="Мускулна група"></div>
+          <div class="chip-scroll" id="equip" role="group" aria-label="Оборудване"></div>
+          <div class="tools-row"><span class="result-count" id="ecount" aria-live="polite"></span></div>
+        </div>
+        <div class="grid grid-3" id="ex-grid"></div>
+        <div class="notice" style="margin-top:28px"><i data-icon="alert"></i><p>При болка (не мускулна умора) спри упражнението. При травми или здравословни проблеми се консултирай с лекар или физиотерапевт.</p></div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/pages/exercises.js"></script>
+</body>
+</html>
