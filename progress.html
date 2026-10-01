@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Прогрес — тегло, тренировки и цели | FitCompass</title>
+  <meta name="description" content="Следи теглото, историята на тренировките и целите си. Данните се пазят само в твоя браузър.">
+  <meta name="theme-color" content="#0b8a5c">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('fc-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Навигационна пътека"><a href="index.html">Начало</a><span>/</span><span>Прогрес</span></nav>
+        <span class="eyebrow"><i data-icon="chart"></i>Следи</span>
+        <h1>Прогрес</h1>
+        <p class="lead">Записвай теглото и тренировките си и следи целите. Без регистрация — данните остават само в този браузър на това устройство.</p>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container">
+        <div class="stat-grid" id="summary"></div>
+
+        <div class="grid grid-2" style="margin-top:24px;align-items:start">
+          <div class="card card-lg" id="weight">
+            <h2>Тегло</h2>
+            <form class="row" id="w-form" novalidate style="align-items:flex-end">
+              <div class="field" style="flex:1;min-width:140px"><label class="label" for="w-date">Дата</label><input class="input" type="date" id="w-date" required></div>
+              <div class="field" style="flex:1;min-width:120px;margin-top:0" data-field="kg"><label class="label" for="w-kg">Тегло</label><div class="input-wrap"><input class="input" id="w-kg" inputmode="decimal" placeholder="75,5"><span class="unit">kg</span></div></div>
+              <button class="btn btn-primary" type="submit"><i data-icon="plus"></i>Добави</button>
+            </form>
+            <span class="error-msg" id="w-err" style="margin-top:8px"></span>
+            <div class="chart-box" id="w-chart" style="margin-top:20px"></div>
+            <ul class="log-list" id="w-list" style="margin-top:12px;max-height:260px;overflow:auto"></ul>
+          </div>
+
+          <div class="card card-lg" id="workouts">
+            <h2>История на тренировките</h2>
+            <form id="t-form" novalidate>
+              <div class="input-row">
+                <div class="field"><label class="label" for="t-date">Дата</label><input class="input" type="date" id="t-date"></div>
+                <div class="field" style="margin-top:0"><label class="label" for="t-type">Вид</label><select class="select" id="t-type"><option>Силова</option><option>Кардио</option><option>Бягане</option><option>Спорт</option><option>Мобилност / йога</option><option>Друго</option></select></div>
+              </div>
+              <div class="input-row" style="margin-top:14px">
+                <div class="field" data-field="min"><label class="label" for="t-min">Продължителност</label><div class="input-wrap"><input class="input" id="t-min" inputmode="numeric" placeholder="60"><span class="unit">мин</span></div></div>
+                <div class="field" style="margin-top:0"><label class="label" for="t-notes">Бележка <span class="opt">(по избор)</span></label><input class="input" id="t-notes" maxlength="300" placeholder="напр. Клек 5×5 80 kg"></div>
+              </div>
+              <span class="error-msg" id="t-err" style="margin-top:8px"></span>
+              <button class="btn btn-primary" type="submit" style="margin-top:14px"><i data-icon="plus"></i>Запиши тренировка</button>
+            </form>
+            <ul class="log-list" id="t-list" style="margin-top:18px;max-height:380px;overflow:auto"></ul>
+          </div>
+        </div>
+
+        <div class="card card-lg" id="goals" style="margin-top:24px">
+          <h2>Цели</h2>
+          <form class="grid grid-3" id="g-form" novalidate style="align-items:end">
+            <div class="field"><label class="label" for="g-weight">Целево тегло</label><div class="input-wrap"><input class="input" id="g-weight" inputmode="decimal" placeholder="—"><span class="unit">kg</span></div></div>
+            <div class="field" style="margin-top:0"><label class="label" for="g-workouts">Тренировки седмично</label><div class="input-wrap"><input class="input" id="g-workouts" inputmode="numeric" placeholder="3"><span class="unit">пъти</span></div></div>
+            <div class="field" style="margin-top:0"><label class="label" for="g-steps">Крачки дневно</label><div class="input-wrap"><input class="input" id="g-steps" inputmode="numeric" placeholder="8000"></div></div>
+          </form>
+          <span class="error-msg" id="g-err" style="margin-top:8px"></span>
+          <div class="grid grid-2" id="g-view" style="margin-top:22px"></div>
+        </div>
+
+        <div class="card" style="margin-top:24px">
+          <h3>Данните ти</h3>
+          <p class="small muted">Всичко се пази локално в браузъра. Изтриването на данните на сайта или смяната на устройство ще ги загуби — направи резервно копие.</p>
+          <div class="row">
+            <button class="btn btn-sm" id="export" type="button">Изтегли резервно копие (JSON)</button>
+            <label class="btn btn-sm" for="import" style="cursor:pointer">Възстанови от файл</label>
+            <input type="file" id="import" accept="application/json,.json" class="sr-only">
+            <span class="spacer"></span>
+            <button class="btn btn-sm btn-ghost" id="clear" type="button" style="color:var(--danger)">Изтрий всички данни</button>
+          </div>
+          <p class="small" id="data-msg" aria-live="polite" style="margin:10px 0 0"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/pages/progress.js"></script>
+</body>
+</html>

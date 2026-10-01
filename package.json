@@ -1,0 +1,12 @@
+{
+  "name": "fitcompass",
+  "version": "1.0.0",
+  "description": "FitCompass — безплатна фитнес платформа: калориен калкулатор, база данни с храни, инсулинов индекс, тренировки и проследяване на прогрес.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "serve": "python3 -m http.server 8080"
+  },
+  "license": "MIT"
+}
