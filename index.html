@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FitCompass — калориен калкулатор, база данни с храни и тренировки</title>
+  <meta name="description" content="Безплатна фитнес платформа на български: калориен калкулатор, база данни с храни, инсулинов индекс, тренировъчни програми, упражнения и проследяване на прогреса.">
+  <meta name="theme-color" content="#0b8a5c">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('fc-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow"><i data-icon="compass"></i>Фитнес знания и инструменти</span>
+          <h1>Тренирай умно.<br>Храни се <em>осъзнато</em>.<br>Следи напредъка.</h1>
+          <p class="lead">Безплатни инструменти, базирани на научни данни: разбери колко калории ти трябват, какво има в храната ти и как да тренираш — без излишен шум.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="calorie-calculator.html"><i data-icon="flame"></i>Изчисли калориите си</a>
+            <a class="btn btn-lg" href="food-database.html"><i data-icon="database"></i>База данни с храни</a>
+          </div>
+          <div class="hero-stats">
+            <div><b>100+</b><span>храни с данни от USDA</span></div>
+            <div><b>7</b><span>калкулатора</span></div>
+            <div><b>54</b><span>измерени стойности на инсулиновия индекс</span></div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="preview-card">
+            <div class="row" style="justify-content:space-between">
+              <span class="eyebrow" style="margin:0">Твоите дневни калории</span>
+              <span class="badge badge-primary">Мускулна маса</span>
+            </div>
+            <div class="big-number" style="margin-top:6px">2 740<small>kcal</small></div>
+            <div class="stackbar" style="margin-top:18px">
+              <span style="width:64%;background:var(--primary)"></span><span style="width:4%;background:color-mix(in srgb,var(--primary) 55%,var(--carbs))"></span><span style="width:11%;background:var(--carbs)"></span><span style="width:12%;background:var(--accent)"></span><span style="width:9%;background:var(--protein)"></span>
+            </div>
+            <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px">
+              <div class="kv-item"><span style="color:var(--protein)">Белтък</span><b>144 г</b></div>
+              <div class="kv-item"><span style="color:var(--carbs)">Въгл.</span><b>370 г</b></div>
+              <div class="kv-item"><span style="color:var(--fat)">Мазн.</span><b>76 г</b></div>
+            </div>
+          </div>
+          <div class="float-chip" style="left:-14px;bottom:-18px"><i data-icon="check" style="color:var(--primary)"></i>BMR · TDEE · макроси</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tools">
+      <div class="container">
+        <span class="eyebrow"><i data-icon="zap"></i>Безплатно, без регистрация</span>
+        <h2>Безплатни фитнес инструменти</h2>
+        <p class="lead" style="margin-bottom:32px">Започни с калорийния калкулатор — той е основата за всичко останало.</p>
+
+        <div class="feature-tool reveal">
+          <div>
+            <span class="eyebrow">Основен инструмент</span>
+            <h2 style="font-size:clamp(1.7rem,3.4vw,2.4rem)">Калориен калкулатор</h2>
+            <p>Много повече от BMI. В 4 кратки стъпки отчитаме работата, дневните крачки, силовите тренировки, кардиото и бягането поотделно — вместо един общ множител.</p>
+            <ul class="feature-list">
+              <li><i data-icon="check"></i>BMR по Mifflin-St Jeor и реален TDEE</li>
+              <li><i data-icon="check"></i>Калорийна цел за отслабване, поддържане, маса или постижения</li>
+              <li><i data-icon="check"></i>Белтъчини, въглехидрати и мазнини в грамове, % и kcal</li>
+              <li><i data-icon="check"></i>Очаквана седмична промяна като реалистичен диапазон</li>
+            </ul>
+            <div class="row" style="margin-top:26px">
+              <a class="btn btn-primary btn-lg" href="calorie-calculator.html">Започни изчислението<i data-icon="arrowRight"></i></a>
+              <a class="btn btn-ghost" href="calculators.html">Всички калкулатори</a>
+            </div>
+          </div>
+          <div class="feature-mock" aria-hidden="true">
+            <div class="small" style="opacity:.8;font-weight:700">Препоръчителен прием</div>
+            <div class="mock-kcal">2 180 <span style="font-size:1rem;opacity:.75">kcal/ден</span></div>
+            <div class="small" style="opacity:.75;margin-top:6px">Отслабване · дефицит 545 kcal · ~0,4–0,6 kg/седм.</div>
+            <div class="mock-bars">
+              <div class="mock-bar"><span>Белтък</span><i><b style="width:30%;background:#9fb0ff"></b></i><span>164 г</span></div>
+              <div class="mock-bar"><span>Въгл.</span><i><b style="width:45%;background:#f6cf6f"></b></i><span>245 г</span></div>
+              <div class="mock-bar"><span>Мазнини</span><i><b style="width:25%;background:#ff9bb8"></b></i><span>61 г</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-4" style="margin-top:20px">
+          <a class="card card-link reveal" href="food-database.html">
+            <span class="icon-tile" data-icon="database"></span>
+            <h3>База данни с храни</h3>
+            <p class="small muted">Калории, макроси, фибри, ГИ и инсулинов индекс с търсене и филтри.</p>
+            <span class="card-arrow">Отвори<i data-icon="arrowRight"></i></span>
+          </a>
+          <a class="card card-link reveal" href="calculators.html#macro">
+            <span class="icon-tile" data-icon="layers"></span>
+            <h3>Макро калкулатор</h3>
+            <p class="small muted">Раздели калориите на белтъчини, въглехидрати и мазнини.</p>
+            <span class="card-arrow">Изчисли<i data-icon="arrowRight"></i></span>
+          </a>
+          <a class="card card-link reveal" href="calculators.html#bmi">
+            <span class="icon-tile" data-icon="scale"></span>
+            <h3>BMI калкулатор</h3>
+            <p class="small muted">Индекс на телесна маса с категории на СЗО и здравословен диапазон.</p>
+            <span class="card-arrow">Изчисли<i data-icon="arrowRight"></i></span>
+          </a>
+          <a class="card card-link reveal" href="calculators.html#one-rm">
+            <span class="icon-tile accent" data-icon="dumbbell"></span>
+            <h3>1RM калкулатор</h3>
+            <p class="small muted">Максимална тежест за едно повторение и таблица с тежести за повторения.</p>
+            <span class="card-arrow">Изчисли<i data-icon="arrowRight"></i></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background:var(--bg-elev);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+      <div class="container">
+        <div class="grid grid-2" style="align-items:center;gap:40px">
+          <div>
+            <span class="eyebrow"><i data-icon="apple"></i>Разгледай храните</span>
+            <h2>Какво всъщност има в чинията ти?</h2>
+            <p class="lead">Търси сред над 100 често срещани храни и сравни калории, белтъчини, въглехидрати, мазнини и фибри — на 100 г или на порция.</p>
+            <form class="search-box" action="food-database.html" method="get" style="margin-top:20px" role="search">
+              <i data-icon="search"></i>
+              <label for="home-q" class="sr-only">Търси храна</label>
+              <input class="input" id="home-q" name="q" type="search" placeholder="Напр. пилешко, ориз, авокадо…">
+            </form>
+            <div class="chip-scroll" style="margin-top:12px">
+              <a class="chip" href="food-database.html?q=пиле">Пилешко</a>
+              <a class="chip" href="food-database.html?q=ориз">Ориз</a>
+              <a class="chip" href="food-database.html?q=кисело мляко">Кисело мляко</a>
+              <a class="chip" href="food-database.html?cat=legumes">Бобови</a>
+              <a class="chip" href="food-database.html?cat=fruit">Плодове</a>
+            </div>
+            <a class="btn btn-primary btn-lg" href="food-database.html" style="margin-top:24px">Отвори базата с храни<i data-icon="arrowRight"></i></a>
+          </div>
+          <div class="grid" id="home-foods" style="gap:12px"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow"><i data-icon="compass"></i>Всичко на едно място</span>
+        <h2>Тренирай · Храни се · Разбери · Следи</h2>
+        <p class="lead" style="margin-bottom:32px">Четири стълба, които покриват всичко нужно за устойчив напредък.</p>
+        <div class="pillars" id="pillars"></div>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container">
+        <div class="card card-lg reveal" style="display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:center">
+          <div>
+            <span class="eyebrow"><i data-icon="droplet"></i>Разбери</span>
+            <h2>Инсулинов индекс — без митове</h2>
+            <p class="muted">Защо картофите предизвикват повече инсулин от пастата при еднакво количество въглехидрати? Защо и месото вдига инсулина? И защо това не прави храната „лоша“?</p>
+            <a class="btn" href="insulin-index.html">Прочети и виж таблицата<i data-icon="arrowRight"></i></a>
+          </div>
+          <div class="legend" aria-label="Примерни стойности">
+            <div class="legend-row" style="grid-template-columns:1fr auto"><span>Бяла паста</span><b>40</b></div>
+            <div class="progress-bar"><i style="width:25%;background:var(--protein)"></i></div>
+            <div class="legend-row" style="grid-template-columns:1fr auto"><span>Телешки стек</span><b>51</b></div>
+            <div class="progress-bar"><i style="width:32%;background:var(--protein)"></i></div>
+            <div class="legend-row" style="grid-template-columns:1fr auto"><span>Бял хляб (референция)</span><b>100</b></div>
+            <div class="progress-bar"><i style="width:62%;background:var(--muted)"></i></div>
+            <div class="legend-row" style="grid-template-columns:1fr auto"><span>Сварени картофи</span><b>121</b></div>
+            <div class="progress-bar"><i style="width:76%;background:var(--protein)"></i></div>
+            <span class="tiny muted">Holt et al., Am J Clin Nutr 1997 · порции от 1000 kJ</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid grid-3">
+          <div class="reveal"><span class="icon-tile" data-icon="book"></span><h3>Проверими данни</h3><p class="muted small">Хранителните стойности са от USDA FoodData Central, ГИ и инсулиновият индекс — от рецензирани изследвания. Всяка стойност има източник.</p></div>
+          <div class="reveal"><span class="icon-tile" data-icon="calculator"></span><h3>Прозрачни формули</h3><p class="muted small">Показваме как е изчислено всяко число. Без „тайни“ алгоритми и без измислени стойности, когато няма данни.</p></div>
+          <div class="reveal"><span class="icon-tile" data-icon="heart"></span><h3>Без крайности</h3><p class="muted small">Никакви „забранени“ храни и чудодейни режими. Устойчиви навици, реалистични очаквания и уважение към индивидуалните различия.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/pages/home.js"></script>
+</body>
+</html>
